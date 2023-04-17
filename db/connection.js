@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const dotenv = require("dotenv")
-
-dotenv.config()
+const env = require("../utils/env")
 
 
 
@@ -32,6 +30,6 @@ process.on('SIGINT', function () {
 });
 
 
-mongoose.connect(process.env.DB_CONNECTION_STRING)
+mongoose.connect(env.DB_CONNECTION_STRING)
 
 module.exports = mongoose
