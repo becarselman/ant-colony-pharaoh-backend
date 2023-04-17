@@ -4,30 +4,40 @@ const bcrypt = require("bcrypt")
 
 const users = [
     {
-        "email": "elvirvlahovljak@gmail.com",
-        "password": bcrypt.hashSync("Pass123", 10)
+        "email": "pharaohadmin1@gmail.com",
+        "password": bcrypt.hashSync("PharaohPassword1", 10)
     },
     {
-        "email": "pharaohadmin@gmail.com",
-        "password": bcrypt.hashSync("PharaohPass123", 10)
+        "email": "pharaohadmin2@gmail.com",
+        "password": bcrypt.hashSync("PharaohPassword2", 10)
     }
 ]
 
-const seedUsers = async () => {
+async function seed() {
+
+    console.log("Attempting to seed...")
+
     const numOfDefaultUsersInDB = await User.count({
         email: {
             $in: [
-                "elvirvlahovljak@gmail.com",
-                "pharaohadmin@gmail.com"
+                "pharaohadmin1@gmail.com",
+                "pharaohadmin2@gmail.com"
             ]
         }
     })
-    
+
     //don't seed users if they already exist in DB
     if (numOfDefaultUsersInDB == 0) {
         await User.insertMany(users)
     }
+
 }
 
-
-module.exports = seedUsers
+seed()
+    .then(() => {
+        console.log("Default users seeded successfully")
+        mongoose.disconnect()
+    })
+    .catch(err => {
+        console.log("Error occured whiled seeding: " + err.stack)
+    })
