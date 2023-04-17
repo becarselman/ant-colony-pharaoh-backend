@@ -1,28 +1,32 @@
-const User = require("../db/models/User")
+const userRepository = require("../repositories/user")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const dotenv  = require("dotenv")
+const errors = require("../utils/errors")
+const env = require("../utils/env")
 
-dotenv.config()
+async function loginUser(email, password) {
+    const user = await userRepository.getUserByEmail(email)
 
-async function getUserByEmail(email) {
-    if (email === undefined) {
-        throw new Error("Email not provided")
+    if (!user) {
+        throw new Error(errors.EMAIL_NOT_FOUND)
     }
 
-    return await User.findOne({ email: email })
-}
+    if (!password) {
+        throw new Error(errors.PASSWORD_NOT_PROVIDED)
+    }
 
-async function checkPassword(user, password) {
-    return await bcrypt.compare(password, user.password)
-}
+    const validPassword = await bcrypt.compare(password, user.password)
 
-function generateJWTToken(user) {
-    return jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: "1d" })
+    if (!validPassword) {
+        throw new Error(errors.INCORRECT_PASSWORD)
+    }
+
+    return {
+        userId: user._id,
+        token: jwt.sign({ email: user.email }, env.JWT_SECRET, { expiresIn: "1d" })
+    }
 }
 
 module.exports = {
-    getUserByEmail,
-    checkPassword,
-    generateJWTToken
+    loginUser
 }
