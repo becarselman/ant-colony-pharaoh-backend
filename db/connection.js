@@ -17,8 +17,7 @@ mongoose.connection.on('disconnected', function () {
 });
 
 
-//is it neccessary to capture SIGTERM?
-process.on('SIGINT', function () {
+function terminateApp() {
     mongoose.disconnect()
         .then(() => {
             console.log("App terminating! Mongoose connection to DB closed.")
@@ -27,8 +26,10 @@ process.on('SIGINT', function () {
         .catch(err => {
             console.log("App terminating! Mongoose connection to DB NOT closed: " + err.stack)
         })
-});
+}
 
+process.on('SIGTERM', terminateApp);
+process.on('SIGINT', terminateApp)
 
 mongoose.connect(env.DB_CONNECTION_STRING)
 
