@@ -1,5 +1,5 @@
 const User = require("../db/models/User")
-const errors = require("../utils/errors")
+const errors = require("../configuration/errors")
 
 
 async function getUserByEmail(email) {
