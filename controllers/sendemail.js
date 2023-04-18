@@ -1,4 +1,4 @@
-const sendMailService = require('../services/sendmail')
+const sendMailService = require('../services/sendemail')
 
 exports.sendEmail = async (req, res) => {
     const { email } = req.body
