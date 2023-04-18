@@ -1,5 +1,6 @@
 const mongoose = require("../connection")
 const validator = require("validator")
+const errors = require("../../configuration/errors")
 
 //password will be hashed with bcrypt
 //so there is no need for password validation here
@@ -9,7 +10,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        validate: [validator.isEmail, "Email in invalid format"]
+        validate: [validator.isEmail, errors.EMAIL_INVALID_FORMAT]
     },
     password: {
         type: String,

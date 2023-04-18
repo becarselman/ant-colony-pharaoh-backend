@@ -1,8 +1,8 @@
 const userRepository = require("../repositories/user")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const errors = require("../utils/errors")
-const env = require("../utils/env")
+const errors = require("../configuration/errors")
+const env = require("../configuration/env")
 
 async function loginUser(email, password) {
     const user = await userRepository.getUserByEmail(email)
