@@ -1,5 +1,5 @@
 const mongoose = require("./connection")
-const User = require("./models/User")(mongoose)
+const User = require("./models/User")
 const bcrypt = require("bcrypt")
 
 const users = [
@@ -36,8 +36,10 @@ async function seed() {
 seed()
     .then(() => {
         console.log("Default users seeded successfully")
-        mongoose.disconnect()
     })
     .catch(err => {
         console.log("Error occured whiled seeding: " + err.stack)
+    })
+    .finally(() => {
+        mongoose.disconnect()
     })
