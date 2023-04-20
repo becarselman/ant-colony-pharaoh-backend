@@ -5,9 +5,8 @@ exports.sendEmail = async (req, res) => {
 
     try {
         await sendMailService.sendEmail(email)
-        res.send('Email Sent!')
+        res.json({message: 'Email Sent!', status: 'OK'})
     } catch (error) {
-        console.error(error)
         res.status(500).send('Failed to send email')
     }
 }
