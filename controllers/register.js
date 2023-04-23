@@ -3,10 +3,10 @@ const loginService = require("../services/login")
 
 
 const registerUser = async (req, res) => {
-    const { email, password } = { ...req.body }
+    const { email, password, role } = { ...req.body }
 
     try {
-        await registerService.registerUser(email, password)
+        await registerService.registerUser(email, password, role)
     }
     catch (err) {
         return res.status(422).json({

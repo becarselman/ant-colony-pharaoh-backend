@@ -10,7 +10,7 @@ async function getUserByEmail(email) {
     return await User.findOne({ email: email })
 }
 
-async function createUser(email, hashedPassword) {
+async function createUser(email, hashedPassword, role) {
     if (!email) {
         throw new Error(errors.EMAIL_NOT_PROVIDED)
     }
@@ -19,7 +19,7 @@ async function createUser(email, hashedPassword) {
         throw new Error(errors.PASSWORD_NOT_PROVIDED)
     }
 
-    User.create({ email: email, password: hashedPassword })
+    User.create({ email: email, password: hashedPassword, role: role })
         .then(user => {
             return user
         })
