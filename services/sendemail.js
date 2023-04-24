@@ -1,8 +1,9 @@
 const nodemailer = require("nodemailer");
+const hbs = require("nodemailer-express-handlebars");
 
 require('dotenv').config()
 
-exports.sendEmail = async (email) => {
+exports.sendEmail = async (email, templateName) => {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -13,13 +14,18 @@ exports.sendEmail = async (email) => {
         pass: process.env.SMTP_PASS,
       },
     })
+
+    transporter.use('compile', hbs({
+      viewEngine: 'express-handlebars',
+      viewPath: './email_templates/'
+    }))
   
     
     const msg = {
-        from: '"The Exapress App" <theExpressApp@example.com>', // sender address
+        from: '"Ant Colony - project pharaoh" <project.pharaoh@hotmail.com>', // sender address
         to: `${email}`, // list of receivers
         subject: "Test", // Subject line
-        text: "Tekst maila", // plain text body
+        template: templateName
     }
     // send mail with defined transport object
     const info = await transporter.sendMail(msg);
@@ -27,7 +33,4 @@ exports.sendEmail = async (email) => {
     console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
-    // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
