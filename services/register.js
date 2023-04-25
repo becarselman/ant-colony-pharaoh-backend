@@ -1,17 +1,22 @@
 const userRepository = require("../repositories/user")
-const bcrypt = require("bcrypt")
 const errors = require("../configuration/errors")
-const userRoles = require("../configuration/user-roles")
-const passwordValidator = require("../validators/password")
+const { userRoles } = require("../utils/constants")
+const { passwordValidator } = require("../utils/validators")
 
 
-async function registerUser(email, password, role) {
+async function registerUser(registerData) {
+    const { email, password, role } = { ...registerData }
+
     if (!email) {
         throw new Error(errors.EMAIL_NOT_PROVIDED)
     }
 
     if (!password) {
         throw new Error(errors.PASSWORD_NOT_PROVIDED)
+    }
+
+    if (!role) {
+        registerData.role = userRoles.USER
     }
 
     let user = await userRepository.getUserByEmail(email)
@@ -24,13 +29,7 @@ async function registerUser(email, password, role) {
         throw new Error(errors.PASSWORD_NOT_STRONG)
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10)
-
-    if (!role) {
-        role = userRoles.USER
-    }
-
-    user = await userRepository.createUser(email, hashedPassword, role)
+    user = await userRepository.createUser(registerData)
 
     return {
         user: user

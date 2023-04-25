@@ -1,31 +1,14 @@
 const User = require("../db/models/User")
-const errors = require("../configuration/errors")
 
 
 async function getUserByEmail(email) {
-    if (!email) {
-        throw new Error(errors.EMAIL_NOT_PROVIDED)
-    }
-
-    return await User.findOne({ email: email })
+    return User.findOne({email: email});
 }
 
-async function createUser(email, hashedPassword, role) {
-    if (!email) {
-        throw new Error(errors.EMAIL_NOT_PROVIDED)
-    }
+async function createUser(userData) {
+    const { email, password, role } = { ...userData }
 
-    if (!hashedPassword) {
-        throw new Error(errors.PASSWORD_NOT_PROVIDED)
-    }
-
-    User.create({ email: email, password: hashedPassword, role: role })
-        .then(user => {
-            return user
-        })
-        .catch(err => {
-            throw err
-        })
+    return await User.create({email: email, password: password, role: role})
 }
 
 module.exports = {

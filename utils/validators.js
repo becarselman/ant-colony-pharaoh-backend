@@ -1,11 +1,7 @@
-const passwordPolicy = require("../configuration/password-policy")
+const { passwordPolicy, userRoles } = require("./constants")
 const validator = require("validator")
 
 function checkPasswordStrength(password) {
-    if (!password) {
-        throw new Error(errors.PASSWORD_NOT_PROVIDED)
-    }
-
     return validator.isStrongPassword(password, {
         minLength: passwordPolicy.MIN_LENGTH,
         minUppercase: passwordPolicy.MIN_UPPERCASE,
@@ -13,7 +9,15 @@ function checkPasswordStrength(password) {
         minSymbols: passwordPolicy.MIN_SYMBOLS
     })
 }
+function doesRoleExist(role) {
+    return Object.values(userRoles).includes(role)
+}
 
 module.exports = {
-    checkPasswordStrength
+    passwordValidator: {
+        checkPasswordStrength
+    },
+    userRolesValidator: {
+        doesRoleExist
+    }
 }
