@@ -6,7 +6,7 @@ exports.sendEmail = async (req, res) => {
 
     try {
         await sendMailService.sendEmail(email, templateName)
-        res.status(200).send("OK")
+        res.status(200).json({ message: 'Email sent successfully.' });
     } catch (error) {
         res.status(500).send({ error: errors.FAILED_TO_SEND_EMAIL})
     }

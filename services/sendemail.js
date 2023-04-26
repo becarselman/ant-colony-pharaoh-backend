@@ -16,16 +16,25 @@ exports.sendEmail = async (email, templateName) => {
       },
     })
   
-    transporter.use('compile', hbs({
-      viewEngine: 'express-handlebars',
-      viewPath: './email_templates/'
-    }))
+    transporter.use(
+      'compile',
+      hbs({
+          viewEngine: {
+              extName: '.hbs',
+              partialsDir: './email-templates/',
+              layoutsDir: './email-templates/',
+              defaultLayout: '',
+          },
+          viewPath: './email-templates/',
+          extName: '.hbs',
+      })
+  );
 
     const msg = {
-        from: '"Ant Colony - project pharaoh" <project.pharaoh@hotmail.com>', // sender address
+        from: '"Ant Colony - project pharaoh" project.pharaoh@hotmail.com', // sender address
         to: `${email}`, // list of receivers
         subject: "Test", // Subject line
-        text: templateName // plain text body
+        template: templateName //template
     }
     // send mail with defined transport object
     const info = await transporter.sendMail(msg);
