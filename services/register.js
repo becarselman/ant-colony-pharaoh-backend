@@ -1,19 +1,10 @@
 const userRepository = require("../repositories/user")
 const errors = require("../configuration/errors")
 const { userRoles } = require("../utils/constants")
-const { passwordValidator } = require("../utils/validators")
 
 
 async function registerUser(registerData) {
-    const { email, password, role } = { ...registerData }
-
-    if (!email) {
-        throw new Error(errors.EMAIL_NOT_PROVIDED)
-    }
-
-    if (!password) {
-        throw new Error(errors.PASSWORD_NOT_PROVIDED)
-    }
+    const { email, role } = { ...registerData }
 
     if (!role) {
         registerData.role = userRoles.USER
@@ -25,14 +16,15 @@ async function registerUser(registerData) {
         throw new Error(errors.EMAIL_TAKEN)
     }
 
-    if (!passwordValidator.checkPasswordStrength(password)) {
-        throw new Error(errors.PASSWORD_NOT_STRONG)
+    try {
+        user = await userRepository.createUser(registerData)
+        
+        return {
+            user: user
+        }
     }
-
-    user = await userRepository.createUser(registerData)
-
-    return {
-        user: user
+    catch (err) {
+        throw err
     }
 }
 

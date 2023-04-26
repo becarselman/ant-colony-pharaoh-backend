@@ -6,14 +6,6 @@ const env = require("../configuration/env")
 async function loginUser(loginData) {
     const { email, password } = { ...loginData }
 
-    if (!email) {
-        throw new Error(errors.EMAIL_NOT_PROVIDED)
-    }
-
-    if (!password) {
-        throw new Error(errors.PASSWORD_NOT_PROVIDED)
-    }
-
     const user = await userRepository.getUserByEmail(email)
 
     if (!user) {

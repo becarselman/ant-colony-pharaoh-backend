@@ -1,7 +1,6 @@
 const mongoose = require("../connection")
 const validator = require("validator")
 const errors = require("../../configuration/errors")
-const { userRolesValidator } = require("../../utils/validators")
 const bcrypt = require("bcrypt")
 
 const UserSchema = new mongoose.Schema({
@@ -18,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         required: true,
-        validate: [userRolesValidator.doesRoleExist, errors.USER_ROLE_NOT_FOUND]
+        uppercase: true,
     }
 });
 
@@ -39,7 +38,7 @@ UserSchema.pre("save",  function (next) {
         })
 })
 
-UserSchema.methods.checkPassword = async (password) => {
+UserSchema.methods.checkPassword = async function (password) {
     const user = this
 
     return await bcrypt.compare(password, user.password)

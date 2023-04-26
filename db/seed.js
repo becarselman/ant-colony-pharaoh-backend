@@ -6,12 +6,12 @@ const users = [
     {
         "email": "pharaohadmin1@gmail.com",
         "password": bcrypt.hashSync("PharaohPassword1", 10),
-        "role": "User"
+        "role": "ADMIN"
     },
     {
         "email": "pharaohadmin2@gmail.com",
         "password": bcrypt.hashSync("PharaohPassword2", 10),
-        "role": "User"
+        "role": "ADMIN"
     }
 ]
 

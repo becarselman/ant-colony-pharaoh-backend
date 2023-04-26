@@ -1,12 +1,14 @@
 module.exports = {
     passwordPolicy: {
-        MIN_LENGTH: 6,
-        MIN_UPPERCASE: 1,
-        MIN_NUMBERS: 1,
-        MIN_SYMBOLS: 0
+        min: 6,
+        max: 30,
+        lowerCase: 1,
+        upperCase: 1,
+        numeric: 1,
+        symbol: 0,
     },
     userRoles: {
-        USER: "User",
-        ADMIN: "Admin"
+        USER: "USER",
+        ADMIN: "ADMIN"
     }
 }

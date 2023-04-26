@@ -6,7 +6,6 @@ module.exports = {
     
     PASSWORD_NOT_PROVIDED: "Password not provided",
     INCORRECT_PASSWORD: "Incorrect password",
-    PASSWORD_NOT_STRONG: "Password is not strong enough",
     
     USER_ROLE_NOT_FOUND: "User role not found"
 }
