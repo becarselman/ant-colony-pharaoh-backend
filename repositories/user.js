@@ -1,15 +1,17 @@
 const User = require("../db/models/User")
-const errors = require("../configuration/errors")
 
 
 async function getUserByEmail(email) {
-    if (!email) {
-        throw new Error(errors.EMAIL_NOT_PROVIDED)
-    }
+    return User.findOne({email: email});
+}
 
-    return await User.findOne({ email: email })
+async function createUser(userData) {
+    const { email, password, role } = { ...userData }
+
+    return await User.create({email: email, password: password, role: role})
 }
 
 module.exports = {
-    getUserByEmail
+    getUserByEmail,
+    createUser
 }
