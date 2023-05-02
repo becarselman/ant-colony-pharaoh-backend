@@ -1,14 +1,22 @@
 const express = require('express')
+const cors = require("cors")
+const env = require("./configuration/env")
 const loginRoutes = require("./routes/login")
 const bodyParser = require('body-parser')
 const sendMailRouter = require('./routes/sendemail')
+const registerRoutes = require("./routes/register")
+const {FRONTEND_URL} = require("./configuration/env");
 
 const app = express()
-const port = 3000
+const port = env.PORT
 
 app.use(express.json())
+app.use(cors({
+  origin: FRONTEND_URL
+}))
 
 app.use("/login", loginRoutes)
+app.use("/register", registerRoutes)
 
 app.use(bodyParser.urlencoded({ extended: false }))
  

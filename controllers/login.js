@@ -3,9 +3,7 @@ const loginService = require("../services/login")
 
 const loginUser = async (req, res) => {
     try {
-        const { email, password } = { ...req.body }
-
-        const { userId, token } = await loginService.loginUser(email, password)
+        const { userId, token } = await loginService.loginUser(req.body)
 
         return res.status(200).json({
             userId: userId,

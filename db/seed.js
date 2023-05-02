@@ -5,11 +5,13 @@ const bcrypt = require("bcrypt")
 const users = [
     {
         "email": "pharaohadmin1@gmail.com",
-        "password": bcrypt.hashSync("PharaohPassword1", 10)
+        "password": bcrypt.hashSync("PharaohPassword1", 10),
+        "role": "ADMIN"
     },
     {
         "email": "pharaohadmin2@gmail.com",
-        "password": bcrypt.hashSync("PharaohPassword2", 10)
+        "password": bcrypt.hashSync("PharaohPassword2", 10),
+        "role": "ADMIN"
     }
 ]
 
@@ -27,7 +29,7 @@ async function seed() {
     })
 
     //don't seed users if they already exist in DB
-    if (numOfDefaultUsersInDB == 0) {
+    if (numOfDefaultUsersInDB === 0) {
         await User.insertMany(users)
     }
 

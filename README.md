@@ -47,8 +47,13 @@ npm run dev
 The environment variables can be found and modified in the `.env` file.
 
 ```bash
+# Port on which backend will run 
+PORT = <value>
+# URL of frontend application
+FRONTEND_URL = "<value>"
 # URL of the Mongo DB
 DB_CONNECTION_STRING = "<value>"
+# Secret string used for signing JWT tokens
 JWT_SECRET = "<value>"
 ```
 
