@@ -6,6 +6,7 @@ module.exports = {
     
     PASSWORD_NOT_PROVIDED: "Password not provided",
     INCORRECT_PASSWORD: "Incorrect password",
+    FAILED_TO_SEND_EMAIL: "Failed to send email",
     
     USER_ROLE_NOT_FOUND: "User role not found"
 }
