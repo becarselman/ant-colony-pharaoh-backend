@@ -24,6 +24,11 @@ app.use(bodyParser.json())
 
 app.use('/sendmail', sendMailRouter)
 
+
+app.post('/sendmail', sendMailRouter);
+app.post('/sendmail/forgot-password', sendMailRouter);
+app.get('/sendmail/reset-password/:token', sendMailRouter);
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
