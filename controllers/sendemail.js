@@ -1,7 +1,7 @@
 const sendEmailService = require("../services/sendemail");
 const errors = require("../configuration/errors");
 const jwt = require("jsonwebtoken");
-const User = require("../db/models/User"); // Assuming you have a User model
+const User = require("../db/models/User");
 
 exports.sendEmail = async (req, res) => {
   const { email, templateName } = req.body;
@@ -16,12 +16,12 @@ exports.sendEmail = async (req, res) => {
 
 exports.sendForgotPasswordEmail = async (req, res) => {
   const { email, templateName } = req.body;
-  const secret = process.env.JWT_SECRET; // Use environment variable for secret key
+  const secret = process.env.JWT_SECRET; 
 
   try {
     const payload = { email };
-    const token = jwt.sign(payload, secret, { expiresIn: "1h" }); // Token valid for one hour
-    const resetUrl = 'http://localhost:3000/resetpassword/${token}'; // Use your own URL path
+    const token = jwt.sign(payload, secret, { expiresIn: "1h" }); 
+    const resetUrl = 'http://localhost:3000/resetpassword/${token}'; 
     await sendEmailService.sendForgotPasswordEmail(email, templateName, resetUrl);
     res.status(200).json({ message: "Email sent successfully." });
   } catch (error) {
@@ -31,15 +31,15 @@ exports.sendForgotPasswordEmail = async (req, res) => {
 
 exports.getResetPassword = async (req, res) => {
   const { token } = req.params;
-  const secret = process.env.JWT_SECRET; // Use environment variable for secret key
+  const secret = process.env.JWT_SECRET; 
 
   try {
     const decoded = jwt.verify(token, secret);
-    const user = await User.findOne({ email: decoded.email }); // Find user by email in your User model
+    const user = await User.findOne({ email: decoded.email }); 
     if (!user) {
       throw new Error(errors.USER_NOT_FOUND);
     }
-    res.status(200).json({ message: "Reset password page." }); // Render your reset password page
+    res.status(200).json({ message: "Reset password page." });
   } catch (error) {
     res.status(400).send({ error: errors.INVALID_RESET_TOKEN });
   }

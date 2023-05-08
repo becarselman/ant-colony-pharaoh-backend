@@ -50,7 +50,7 @@ function getSubject(template) {
   if (match && match[1]) {
     return match[1];
   } else {
-    return "Ant Colony"; //default subject
+    return "Ant Colony"; 
   }
 }
 
