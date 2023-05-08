@@ -8,7 +8,7 @@ const registerRoutes = require("./routes/register")
 const {FRONTEND_URL} = require("./configuration/env");
 
 const app = express()
-const port = 3000
+const port = env.PORT
 
 app.use(express.json())
 app.use(cors({
@@ -34,5 +34,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, async () => {
-  console.log(`Express application is running on http://localhost:${3000}`)
+  console.log(`Express application is running on http://localhost:${port}`)
 })
