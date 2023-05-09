@@ -1,5 +1,5 @@
 const User = require("../db/models/User");
-const { v4: uuidv4 } = require('uuid');
+const jwt = require('jsonwebtoken');
 const sendMailService = require("./sendemail");
 
 async function forgotPassword(email) {
@@ -9,7 +9,7 @@ async function forgotPassword(email) {
     throw new Error("User not found");
   }
 
-  const token = uuidv4();
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
   
   user.resetPasswordToken = token;
   user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
