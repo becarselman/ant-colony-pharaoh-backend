@@ -5,6 +5,7 @@ const loginRoutes = require("./routes/login")
 const bodyParser = require('body-parser')
 const sendMailRouter = require('./routes/sendemail')
 const registerRoutes = require("./routes/register")
+const forgotPasswordRoutes = require("./routes/forgotPassword")
 const {FRONTEND_URL} = require("./configuration/env");
 
 const app = express()
@@ -17,9 +18,9 @@ app.use(cors({
 
 app.use("/login", loginRoutes)
 app.use("/register", registerRoutes)
+app.use("/forgot-password", forgotPasswordRoutes)
 
 app.use(bodyParser.urlencoded({ extended: false }))
- 
 app.use(bodyParser.json())
 
 app.use('/sendmail', sendMailRouter)
