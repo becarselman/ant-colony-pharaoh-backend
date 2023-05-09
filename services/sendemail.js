@@ -11,6 +11,9 @@ exports.sendEmail = async (email, templateName, context) => {
       host: env.SMTP_HOST,
       port: env.SMTP_PORT,
       secure: env.SMTP_SECURE,
+      tls: {
+        rejectUnauthorized: false,
+      },
       auth: {
         user: env.SMTP_USER,
         pass: env.SMTP_PASS,

@@ -1,27 +1,24 @@
 const User = require("../db/models/User");
-const jwt = require('jsonwebtoken');
 const sendMailService = require("./sendemail");
+const userRepository = require("../repositories/user");
 
 async function forgotPassword(email) {
-  const user = await User.findOne({ email: email });
+  const user = await userRepository.getUserByEmail(email);
 
   if (!user) {
     throw new Error("User not found");
   }
 
-  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  
-  user.resetPasswordToken = token;
-  user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+  const token = await userRepository.setResetPasswordToken(user);
 
   const templateName = "forgot-password";
-  const url = `${process.env.FRONTEND_URL}/reset-password/${token}`;
+  const resetPasswordUrl = process.env.RESET_PASSWORD_URL;
+  const url = `${resetPasswordUrl}${token}`;
   const context = {
     resetLink: url
   };
 
   await sendMailService.sendEmail(email, templateName, context);
-  console.log('Forgot password email sent successfully.');
 
   return token;
 }

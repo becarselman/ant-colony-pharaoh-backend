@@ -1,6 +1,5 @@
 const sendMailService = require('../services/sendemail')
 const errors = require("../configuration/errors")
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 exports.sendEmail = async (req, res) => {
     const { email, templateName } = req.body
