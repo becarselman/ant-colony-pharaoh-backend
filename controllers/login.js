@@ -12,7 +12,7 @@ const loginUser = async (req, res) => {
     }
     catch (err) {
         return res.status(401).json({
-            error: err.message
+            error: "Email or password incorrect"
         })
     }
 }
