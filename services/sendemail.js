@@ -3,8 +3,6 @@ const hbs = require("nodemailer-express-handlebars");
 const env = require('../configuration/env');
 const fs = require("fs");
 
-require('dotenv').config()
-
 exports.sendEmail = async (email, templateName, context) => {
     
     let transporter = nodemailer.createTransport({
