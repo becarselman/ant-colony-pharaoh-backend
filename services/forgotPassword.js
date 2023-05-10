@@ -13,13 +13,13 @@ async function forgotPassword(email) {
   const user = await userRepository.getUserByEmail(email);
 
   if (!user) {
-    throw new Error("User not found");
+    throw new Error(errors.EMAIL_NOT_FOUND);
   }
 
   const token = await setResetPasswordToken(user);
 
   const templateName = "forgot-password";
-  const resetPasswordUrl = env.RESET_PASSWORD_URL;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password/`;
   const url = `${resetPasswordUrl}${token}`;
   const context = {
     resetLink: url
