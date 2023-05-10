@@ -11,9 +11,17 @@ async function createUser(userData) {
   return await User.create({email: email, password: password, role: role})
 }
 
+async function getUserById(userId) {
+  return User.findById(userId);
+}
+
+async function updateUserPassword(userId, hashedPassword) {
+  return User.findByIdAndUpdate(userId, { password: hashedPassword });
+}
 
 module.exports = {
   getUserByEmail,
   createUser,
-
+  getUserById,
+  updateUserPassword
 };
