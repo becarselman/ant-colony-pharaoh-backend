@@ -3,9 +3,10 @@ const User = require("../db/models/User");
 const sendMailService = require("./sendemail");
 const userRepository = require("../repositories/user");
 const env = require("../configuration/env")
+const { generateToken } = require("./helper");
 
 async function setResetPasswordToken(user) {
-  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  const token = generateToken({ userId: user._id }, "1h");
   return token;
 }
 
@@ -19,8 +20,8 @@ async function forgotPassword(email) {
   const token = await setResetPasswordToken(user);
 
   const templateName = "forgot-password";
-  const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password/`;
-  const url = `${resetPasswordUrl}${token}`;
+  const resetPasswordUrl = env.FRONTEND_URL;
+  const url = `${resetPasswordUrl}/reset-password/${token}`;
   const context = {
     resetLink: url
   };
