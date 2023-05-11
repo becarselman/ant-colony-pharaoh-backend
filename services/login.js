@@ -1,6 +1,6 @@
 const userRepository = require("../repositories/user")
 const errors = require("../configuration/errors")
-const { generateToken } = require("./helper")
+const { generateToken } = require("../utils/helper")
 
 async function loginUser(loginData) {
     const { email, password } = { ...loginData }

@@ -3,7 +3,7 @@ const User = require("../db/models/User");
 const sendMailService = require("./sendemail");
 const userRepository = require("../repositories/user");
 const env = require("../configuration/env")
-const { generateToken } = require("./helper");
+const { generateToken } = require("../utils/helper");
 
 async function setResetPasswordToken(user) {
   const token = generateToken({ userId: user._id }, "1h");

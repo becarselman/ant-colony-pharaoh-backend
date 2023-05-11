@@ -2,9 +2,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const userRepository = require('../repositories/user');
 const errors = require('../configuration/errors');
+const env = require("../configuration/env")
 
 async function resetPassword(token, newPassword, confirmPassword) {
-  const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+  const decodedToken = jwt.verify(token, env.JWT_SECRET);
   const user = await userRepository.getUserById(decodedToken.userId);
 
   if (!user) {
