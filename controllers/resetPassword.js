@@ -1,10 +1,9 @@
 const resetPasswordService = require('../services/resetPassword');
 const errors = require('../configuration/errors');
 
-exports.showResetPasswordForm = resetPasswordService.showResetPasswordForm;
-
 exports.resetPassword = async (req, res) => {
-  const { token } = req.params;
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
   const { newPassword, confirmPassword } = req.body;
   try {
     await resetPasswordService.resetPassword(token, newPassword, confirmPassword);

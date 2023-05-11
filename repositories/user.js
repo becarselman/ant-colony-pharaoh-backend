@@ -1,5 +1,4 @@
 const User = require("../db/models/User");
-const jwt = require('jsonwebtoken');
 
 async function getUserByEmail(email) {
   return User.findOne({email: email});

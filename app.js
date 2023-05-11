@@ -6,17 +6,14 @@ const bodyParser = require('body-parser')
 const sendMailRouter = require('./routes/sendemail')
 const registerRoutes = require("./routes/register")
 const forgotPasswordRoutes = require("./routes/forgotPassword")
-const resetPasswordRoutes = require("./routes/resetPassword") // Dodano
+const resetPasswordRoutes = require("./routes/resetPassword") 
 const {FRONTEND_URL} = require("./configuration/env");
 
 const app = express()
 const port = env.PORT
 
 app.use(express.json())
-app.use(cors({
-  origin: FRONTEND_URL
-}))
-
+app.use(cors())
 app.use("/login", loginRoutes)
 app.use("/register", registerRoutes)
 app.use("/forgot-password", forgotPasswordRoutes)
