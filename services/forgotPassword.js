@@ -5,11 +5,6 @@ const userRepository = require("../repositories/user");
 const env = require("../configuration/env")
 const { generateToken } = require("../utils/helper");
 
-async function setResetPasswordToken(user) {
-  const token = generateToken({ userId: user._id }, "1h");
-  return token;
-}
-
 async function forgotPassword(email) {
   const user = await userRepository.getUserByEmail(email);
 
@@ -17,7 +12,7 @@ async function forgotPassword(email) {
     throw new Error(errors.EMAIL_NOT_FOUND);
   }
 
-  const token = await setResetPasswordToken(user);
+  const token = generateToken({ userId: user._id }, "1h");
 
   const templateName = "forgot-password";
   const resetPasswordUrl = env.FRONTEND_URL;
@@ -30,6 +25,11 @@ async function forgotPassword(email) {
 
   return token;
 }
+
+module.exports = {
+  forgotPassword,
+};
+
 
 module.exports = {
   forgotPassword,
