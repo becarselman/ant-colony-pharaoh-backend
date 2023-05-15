@@ -7,6 +7,8 @@ const sendMailRouter = require('./routes/sendemail')
 const registerRoutes = require("./routes/register")
 const forgotPasswordRoutes = require("./routes/forgotPassword")
 const resetPasswordRoutes = require("./routes/resetPassword") 
+const projectRoutes = require('./routes/projects')
+
 
 const app = express()
 const port = env.PORT
@@ -16,10 +18,14 @@ app.use(cors({
   origin: env.FRONTEND_URL,
   optionsSuccessStatus: 200
 }));
+  origin: env.FRONTEND_URL,
+  optionsSuccessStatus: 200
+}));
 app.use("/login", loginRoutes)
 app.use("/register", registerRoutes)
 app.use("/forgot-password", forgotPasswordRoutes)
 app.use("/reset-password", resetPasswordRoutes)
+app.use('/projects', projectRoutes);
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
