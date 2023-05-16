@@ -14,7 +14,7 @@ const projectSchema = new mongoose.Schema({
   projectType: { type: String, enum: ['fixed', 'on going'], required: true },
   hourlyRate: { type: Number, required: true },
   projectValue: { type: Number, required: true },
-  actualEndDate: { type: Date },
+  actualEndDate: { type: Date, default: null }, 
   salesChannel: { type: String },
   isFinished: { type: Boolean, default: false }
 });

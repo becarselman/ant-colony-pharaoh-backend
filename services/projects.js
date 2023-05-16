@@ -1,31 +1,18 @@
-const Project = require('../db/models/projects');
+const joi = require("joi");
+const projectRepository = require('../repositories/projects');
 const errors = require("../configuration/errors");
 
 
 module.exports = {
-  async createProject(name, description, duration, developers, projectType, hourlyRate, projectValue, endDate, salesChannel, isFinished,) {
-    const project = new Project({
-      name,
-      description,
-      duration,
-      developers,
-      projectType,
-      hourlyRate,
-      projectValue,
-      endDate,
-      salesChannel,
-      isFinished
-  
-    });
-    await project.validate();
-    await project.save();
+  async createProject(data) {
+    const project = await projectRepository.createProject(data);
     return project;
   },
 
   async getProject(id) {
-    const project = await Project.findById(id);
+    const project = await projectRepository.getProjectById(id);
     if (!project) {
-      throw new Error(errors.PROJECT_NOT_FOUND);
+      throw new Error(errors.DATA_NOT_FOUND);
     }
     return project;
   },

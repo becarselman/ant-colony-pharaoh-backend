@@ -5,8 +5,6 @@ const loginRoutes = require("./routes/login")
 const bodyParser = require('body-parser')
 const sendMailRouter = require('./routes/sendemail')
 const registerRoutes = require("./routes/register")
-const forgotPasswordRoutes = require("./routes/forgotPassword")
-const resetPasswordRoutes = require("./routes/resetPassword") 
 const projectRoutes = require('./routes/projects')
 
 
@@ -23,8 +21,6 @@ app.use(cors({
 }));
 app.use("/login", loginRoutes)
 app.use("/register", registerRoutes)
-app.use("/forgot-password", forgotPasswordRoutes)
-app.use("/reset-password", resetPasswordRoutes)
 app.use('/projects', projectRoutes);
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -37,5 +33,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, async () => {
-  console.log(`Express application is running on http://localhost:${port}`)
+  console.log(`Express application is running on ${env.BASE_URL}${port}`);
 })

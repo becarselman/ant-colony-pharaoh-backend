@@ -1,11 +1,9 @@
-const projectService = require('../services/projects');
+const projectRepository = require('../repositories/projects');
 
 module.exports = {
   async createProject(req, res, next) {
     try {
-      const { name, description, duration, developers, projectType, hourlyRate, projectValue, endDate, salesChannel, isFinished, } = req.body;
-      const project = await projectService.createProject(name, description, duration, developers, projectType, 
-        hourlyRate, projectValue, endDate, salesChannel, isFinished,);
+      const project = await projectRepository.createProject(req.body);
       res.status(201).json(project);
     } catch (error) {
       next(error);
@@ -15,7 +13,7 @@ module.exports = {
   async getProject(req, res, next) {
     try {
       const { id } = req.params;
-      const project = await projectService.getProject(id);
+      const project = await projectRepository.getProjectById(id);
       res.status(200).json(project);
     } catch (error) {
       next(error);

@@ -11,4 +11,5 @@ module.exports = {
     SMTP_SECURE: process.env.SMTP_SECURE === 'true',
     SMTP_USER: process.env.SMTP_USER,
     SMTP_PASS: process.env.SMTP_PASS,
+    BASE_URL: values.BASE_URL
 }

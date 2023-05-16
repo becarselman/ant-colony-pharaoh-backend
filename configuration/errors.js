@@ -13,7 +13,26 @@ module.exports = {
     INVALID_TOKEN: "Token is not valid",
     TOKEN_EXPIRED: "The Token has expired",
     PROJECT_NOT_FOUND: "Project not found",
-    INVALID_PROJECT_ID: "Invalid project id"
+    INVALID_PROJECT_ID: "Invalid project id",
+    PROJECT_NAME_NOT_PROVIDED: "Project name is not provided.",
+    PROJECT_DESCRIPTION_NOT_PROVIDED: "Project description is not provided.",
+    PROJECT_START_DATE_INVALID_FORMAT: "Invalid format for project start date.",
+    PROJECT_START_DATE_NOT_PROVIDED: "Project start date is not provided.",
+    PROJECT_END_DATE_INVALID_FORMAT: "Invalid format for project end date.",
+    PROJECT_END_DATE_NOT_PROVIDED: "Project end date is not provided.",
+    PROJECT_DEVELOPER_USER_ID_NOT_PROVIDED: "Developer user ID is not provided.",
+    PROJECT_DEVELOPER_FULL_TIME_NOT_PROVIDED: "Full-time status of developer is not provided.",
+    PROJECT_DEVELOPERS_NOT_PROVIDED: "Project developers are not provided.",
+    PROJECT_TYPE_NOT_PROVIDED: "Project type is not provided.",
+    PROJECT_TYPE_INVALID: "Invalid project type.",
+    PROJECT_HOURLY_RATE_INVALID_FORMAT: "Invalid format for project hourly rate.",
+    PROJECT_HOURLY_RATE_NOT_PROVIDED: "Project hourly rate is not provided.",
+    PROJECT_VALUE_INVALID_FORMAT: "Invalid format for project value.",
+    PROJECT_VALUE_NOT_PROVIDED: "Project value is not provided.",
+    PROJECT_ACTUAL_END_DATE_INVALID_FORMAT: "Project end date is in incorrect format",
+    PROJECT_SALES_CHANNEL_EMPTY: "Sales channel is empty.",
+    DATA_NOT_FOUND: "Data not found",
+    
 
 
 }
