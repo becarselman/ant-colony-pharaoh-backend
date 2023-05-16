@@ -1,4 +1,3 @@
-const joi = require("joi");
 const projectRepository = require('../repositories/projects');
 const errors = require("../configuration/errors");
 

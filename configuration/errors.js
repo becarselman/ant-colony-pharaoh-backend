@@ -14,8 +14,6 @@ module.exports = {
     TOKEN_EXPIRED: "The Token has expired",
     PROJECT_NOT_FOUND: "Project not found",
     INVALID_PROJECT_ID: "Invalid project id",
-    PROJECT_NAME_NOT_PROVIDED: "Project name is not provided.",
-    PROJECT_DESCRIPTION_NOT_PROVIDED: "Project description is not provided.",
     PROJECT_START_DATE_INVALID_FORMAT: "Invalid format for project start date.",
     PROJECT_START_DATE_NOT_PROVIDED: "Project start date is not provided.",
     PROJECT_END_DATE_INVALID_FORMAT: "Invalid format for project end date.",

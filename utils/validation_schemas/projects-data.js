@@ -3,14 +3,8 @@ const validationRules = require("./validation-rules");
 const errors = require("../../configuration/errors");
 
 const projectDataSchema = joi.object({
-    name: joi.string().required().messages({
-        "string.empty": errors.PROJECT_NAME_NOT_PROVIDED,
-        "string.required": errors.PROJECT_NAME_NOT_PROVIDED,
-    }),
-    description: joi.string().required().messages({
-        "string.empty": errors.PROJECT_DESCRIPTION_NOT_PROVIDED,
-        "any.required": errors.PROJECT_DESCRIPTION_NOT_PROVIDED,
-    }),
+    name: joi.string().required(),
+    description: joi.string().required(),
     duration: joi.object({
         from: joi.date().required().messages({
             "date.base": errors.PROJECT_START_DATE_INVALID_FORMAT,

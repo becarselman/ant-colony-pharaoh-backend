@@ -1,8 +1,7 @@
 const Project = require('../db/models/projects');
 
 async function createProject(projectData) {
-  const project = new Project(projectData);
-  await project.save();
+  const project = await Project.create(projectData);
   return project;
 }
 
