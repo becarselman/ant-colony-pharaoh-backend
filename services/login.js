@@ -1,7 +1,6 @@
 const userRepository = require("../repositories/user")
-const jwt = require("jsonwebtoken")
 const errors = require("../configuration/errors")
-const env = require("../configuration/env")
+const { generateToken } = require("../utils/helper")
 
 async function loginUser(loginData) {
     const { email, password } = { ...loginData }
@@ -18,9 +17,11 @@ async function loginUser(loginData) {
         throw new Error(errors.INCORRECT_PASSWORD)
     }
 
+    const token = generateToken({ email: user.email }, "1d");
+
     return {
         userId: user._id,
-        token: jwt.sign({email: user.email}, env.JWT_SECRET, {expiresIn: "1d"})
+        token
     }
 }
 

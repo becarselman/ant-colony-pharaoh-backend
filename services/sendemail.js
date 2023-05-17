@@ -3,14 +3,15 @@ const hbs = require("nodemailer-express-handlebars");
 const env = require('../configuration/env');
 const fs = require("fs");
 
-require('dotenv').config()
-
-exports.sendEmail = async (email, templateName) => {
+exports.sendEmail = async (email, templateName, context) => {
     
     let transporter = nodemailer.createTransport({
       host: env.SMTP_HOST,
       port: env.SMTP_PORT,
       secure: env.SMTP_SECURE,
+      tls: {
+        rejectUnauthorized: false,
+      },
       auth: {
         user: env.SMTP_USER,
         pass: env.SMTP_PASS,
@@ -29,17 +30,18 @@ exports.sendEmail = async (email, templateName) => {
           viewPath: './email-templates/',
           extName: '.hbs',
       })
-  );
+    );
 
-  const templatePath = `./email-templates/${templateName}.hbs`
-  const template = fs.readFileSync(templatePath, 'utf-8');
-  const emailSubject = getSubject(template);
+    const templatePath = `./email-templates/${templateName}.hbs`
+    const template = fs.readFileSync(templatePath, 'utf-8');
+    const emailSubject = getSubject(template);
 
     const msg = {
         from: '"Ant Colony - project pharaoh" project.pharaoh@hotmail.com', // sender address
         to: `${email}`, // list of receivers
         subject: emailSubject, // Subject line
-        template: templateName //template
+        template: templateName, //template
+        context: context
     }
     // send mail with defined transport object
     const info = await transporter.sendMail(msg);
