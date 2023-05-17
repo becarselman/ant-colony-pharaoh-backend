@@ -16,9 +16,7 @@ app.use(cors({
   origin: env.FRONTEND_URL,
   optionsSuccessStatus: 200
 }));
-  origin: env.FRONTEND_URL,
-  optionsSuccessStatus: 200
-}));
+
 app.use("/login", loginRoutes)
 app.use("/register", registerRoutes)
 app.use('/projects', projectRoutes);
