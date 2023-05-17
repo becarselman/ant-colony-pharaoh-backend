@@ -11,6 +11,11 @@ module.exports = {
     USER_NOT_FOUND: "User not found",
     PASSWORD_TOKEN_EXPIRED: "The password reset token has expired",
     INVALID_TOKEN: "Token is not valid",
-    TOKEN_EXPIRED: "The Token has expired"
+    TOKEN_EXPIRED: "The Token has expired",
+    PROJECT_NOT_FOUND: "Project not found",
+    INVALID_PROJECT_ID: "Invalid project id",
+    DATA_NOT_FOUND: "Data not found",
+    
+
 
 }
