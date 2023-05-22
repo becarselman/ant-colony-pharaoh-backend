@@ -19,7 +19,7 @@ app.use(cors({
 
 app.use("/login", loginRoutes)
 app.use("/register", registerRoutes)
-app.use('/projects', projectRoutes);
+app.use('/projects', projectRoutes); 
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())

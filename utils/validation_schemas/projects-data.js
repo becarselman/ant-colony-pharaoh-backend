@@ -21,6 +21,7 @@ const projectDataSchema = joi.object({
     actualEndDate: joi.date().allow(null),
     salesChannel: joi.string(),
     isFinished: joi.boolean(),
+    projectStatus: joi.string().required(),
 });
 
 module.exports = {

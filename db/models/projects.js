@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
 
+const ProjectStatus = {
+  Active: 'Active',
+  Inactive: 'Inactive',
+  OnHold: 'On-hold',
+  Completed: 'Completed'
+};
+
 const projectSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
@@ -16,7 +23,9 @@ const projectSchema = new mongoose.Schema({
   projectValue: { type: Number, required: true },
   actualEndDate: { type: Date, default: null }, 
   salesChannel: { type: String },
-  isFinished: { type: Boolean, default: false }
+  isFinished: { type: Boolean, default: false },
+  projectStatus: {	type: String, enum: Object.values(ProjectStatus),	default: ProjectStatus.Active,
+	},
 });
 
 module.exports = mongoose.model('Project', projectSchema);

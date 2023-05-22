@@ -10,7 +10,13 @@ async function getProjectById(projectId) {
   return project;
 }
 
+async function getAllProjects() {
+  const projects = await Project.find();
+  return projects;
+}
+
 module.exports = {
   createProject,
   getProjectById,
+  getAllProjects,
 };
