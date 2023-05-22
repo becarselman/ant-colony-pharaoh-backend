@@ -31,5 +31,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, async () => {
-  console.log(`Express application is running on ${env.BASE_URL}${port}`);
+  console.log(`Express application is running on ${port}`);
 })

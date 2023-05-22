@@ -5,9 +5,18 @@ async function getUserByEmail(email) {
 }
 
 async function createUser(userData) {
-  const { email, password, role } = { ...userData }
+  const {
+    email,
+    name,
+    surname,
+    department,
+    salary,
+    stack,
+    password,
+    role
+  } = { ...userData }
 
-  return await User.create({email: email, password: password, role: role})
+  return await User.create({email, name, surname, department, salary, stack, password, role})
 }
 
 async function getUserById(userId) {
