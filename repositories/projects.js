@@ -10,14 +10,22 @@ async function getProjectById(projectId) {
   return project;
 }
 
-async function getPaginatedProjects(skip, limit) {
-  const projects = await Project.find().skip(parseInt(skip)).limit(parseInt(limit));
+async function getPaginatedProjects(page, limit) {
+  const offset = (page - 1) * limit;
+  const projects = await Project.find()
+    .skip(offset)
+    .limit(limit);
   return projects;
 }
 
+async function getProjectsCount() {
+  const count = await Project.countDocuments();
+  return count;
+}
 
 module.exports = {
   createProject,
   getProjectById,
   getPaginatedProjects,
+  getProjectsCount,
 };

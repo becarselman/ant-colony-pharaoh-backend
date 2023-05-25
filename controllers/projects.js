@@ -22,12 +22,14 @@ module.exports = {
 
   async getPaginatedProjects(req, res, next) {
     try {
-      const { skip, limit } = req.query;
-      const projects = await projectService.getPaginatedProjects(skip, limit);
-      res.status(200).json(projects);
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
+      const result = await projectService.getPaginatedProjects(page, limit);
+      const { projects, count } = result;
+      res.status(200).json({ projects, count });
     } catch (error) {
       next(error);
     }
-  },  
+  },
 
 };
