@@ -17,6 +17,8 @@ module.exports = {
     FAILED_TO_SEND_EMAIL: "Failed to send email",
     USER_ROLE_NOT_FOUND: "User role not found",
     USER_NOT_FOUND: "User not found",
+    ID_NOT_PROVIDED: "User ID not provided",
+    ID_WRONG_FORMAT: "ID is in wrong format",
     PASSWORD_TOKEN_EXPIRED: "The password reset token has expired",
     INVALID_TOKEN: "Token is not valid",
     TOKEN_EXPIRED: "The Token has expired",

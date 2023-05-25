@@ -24,7 +24,7 @@ async function getAllUsers() {
 }
 
 async function getUserById(userId) {
-  return User.findById(userId);
+  return await User.findById(userId).exec()
 }
 
 async function updateUserPassword(userId, hashedPassword) {
