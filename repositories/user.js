@@ -19,6 +19,10 @@ async function createUser(userData) {
   return await User.create({email, name, surname, department, salary, stack, password, role})
 }
 
+async function getAllUsers() {
+  return await User.find({}).exec()
+}
+
 async function getUserById(userId) {
   return User.findById(userId);
 }
@@ -30,6 +34,7 @@ async function updateUserPassword(userId, hashedPassword) {
 module.exports = {
   getUserByEmail,
   createUser,
+  getAllUsers,
   getUserById,
   updateUserPassword
 };
