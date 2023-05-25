@@ -5,22 +5,15 @@ async function getUserByEmail(email) {
 }
 
 async function createUser(userData) {
-  const {
-    email,
-    name,
-    surname,
-    department,
-    salary,
-    stack,
-    password,
-    role
-  } = { ...userData }
-
-  return await User.create({email, name, surname, department, salary, stack, password, role})
+  return await User.create(userData)
 }
 
-async function getAllUsers() {
-  return await User.find({}).exec()
+async function getAllUsers(page, pageSize) {
+  return await User
+      .find({})
+      .skip((page - 1) * pageSize)
+      .limit(pageSize)
+      .exec()
 }
 
 async function getUserById(userId) {

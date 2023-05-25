@@ -2,7 +2,7 @@ const usersService = require('../services/users')
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await usersService.getAllUsers()
+        const users = await usersService.getAllUsers(req.query.page, req.query.size)
 
         return res.status(200).json({
             users

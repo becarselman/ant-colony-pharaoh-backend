@@ -2,17 +2,11 @@ const userRepository = require("./../repositories/user")
 const errors = require("../configuration/errors");
 const { CustomError } = require("../utils/customError");
 
-const getAllUsers = async () => {
-    return await userRepository.getAllUsers()
+const getAllUsers = async (page, pageSize) => {
+    return await userRepository.getAllUsers(page, pageSize)
 }
 
 const getUserById = async (id) => {
-    if (!id) {
-        throw new CustomError(errors.ID_NOT_PROVIDED, {
-            responseCode: 422
-        })
-    }
-
 
     let user
 

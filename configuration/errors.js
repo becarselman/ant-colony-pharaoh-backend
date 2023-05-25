@@ -17,7 +17,7 @@ module.exports = {
     FAILED_TO_SEND_EMAIL: "Failed to send email",
     USER_ROLE_NOT_FOUND: "User role not found",
     USER_NOT_FOUND: "User not found",
-    ID_NOT_PROVIDED: "User ID not provided",
+    ID_NOT_PROVIDED: "ID not provided",
     ID_WRONG_FORMAT: "ID is in wrong format",
     PASSWORD_TOKEN_EXPIRED: "The password reset token has expired",
     INVALID_TOKEN: "Token is not valid",
@@ -25,6 +25,8 @@ module.exports = {
     PROJECT_NOT_FOUND: "Project not found",
     INVALID_PROJECT_ID: "Invalid project id",
     DATA_NOT_FOUND: "Data not found",
+    PAGE_NUMBER_LESS_THAN_1: "Page number must be greater than 0",
+    PAGE_SIZE_LESS_THAN_0: "Page size must be positive"
     
 
 
