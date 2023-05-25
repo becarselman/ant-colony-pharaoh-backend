@@ -24,6 +24,12 @@ async function updateUserPassword(userId, hashedPassword) {
   return User.findByIdAndUpdate(userId, { password: hashedPassword });
 }
 
+async function updateUserById(userId, newData) {
+  return User.findByIdAndUpdate(userId, newData, {
+    runValidators: true
+  })
+}
+
 async function deleteUserById(userId) {
   return await User.findByIdAndDelete(userId).exec()
 }
@@ -34,5 +40,6 @@ module.exports = {
   getAllUsers,
   getUserById,
   updateUserPassword,
+  updateUserById,
   deleteUserById
 };

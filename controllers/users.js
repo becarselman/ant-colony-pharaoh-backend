@@ -43,8 +43,22 @@ const deleteUserById = async (req, res) => {
     }
 }
 
+const updateUserById = async (req, res) => {
+    try {
+        await usersService.updateUserById(req.params.id, req.body)
+
+        return res.status(204).send()
+    }
+    catch (err) {
+        return res.status(err.data.responseCode).json({
+            error: err.message
+        })
+    }
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
-    deleteUserById
+    deleteUserById,
+    updateUserById
 }

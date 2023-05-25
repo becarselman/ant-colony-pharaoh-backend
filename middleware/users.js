@@ -1,4 +1,6 @@
 const errors = require("../configuration/errors");
+const { updateUserDataSchema } = require("./../utils/validation_schemas/update-user-data")
+
 const validatePageAndPageSize = async function (req, res, next) {
 
     if (!req.query.page) {
@@ -35,7 +37,21 @@ const validateId = async (req, res, next) => {
     await next()
 }
 
+const validateUpdateUserData = async function(req, res, next) {
+    try {
+        await updateUserDataSchema.validateAsync(req.body)
+
+        await next()
+    }
+    catch (err) {
+        return res.status(403).json({
+            error: err.message
+        })
+    }
+}
+
 module.exports = {
     validatePageAndPageSize,
-    validateId
+    validateId,
+    validateUpdateUserData
 }

@@ -47,8 +47,32 @@ const deleteUserById = async(id) => {
     }
 }
 
+const updateUserById = async (id, newData) => {
+    if (!newData) {
+        return
+    }
+
+    let result
+
+    try {
+        result = await userRepository.updateUserById(id, newData)
+    }
+    catch(err) {
+        throw new CustomError(errors.ID_WRONG_FORMAT, {
+            responseCode: 422
+        })
+    }
+
+    if (!result) {
+        throw new CustomError(errors.USER_NOT_FOUND, {
+            responseCode: 404
+        })
+    }
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
-    deleteUserById
+    deleteUserById,
+    updateUserById
 }
