@@ -28,7 +28,27 @@ const getUserById = async (id) => {
     return user
 }
 
+const deleteUserById = async(id) => {
+    let result
+
+    try {
+        result = await userRepository.deleteUserById(id)
+    }
+    catch(err) {
+        throw new CustomError(errors.ID_WRONG_FORMAT, {
+            responseCode: 422
+        })
+    }
+
+    if (!result) {
+        throw new CustomError(errors.USER_NOT_FOUND, {
+            responseCode: 404
+        })
+    }
+}
+
 module.exports = {
     getAllUsers,
-    getUserById
+    getUserById,
+    deleteUserById
 }
