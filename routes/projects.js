@@ -4,7 +4,7 @@ const projectController = require('../controllers/projects');
 const { validateProjectData } = require("../middleware/projects")
 
 router.post('/', validateProjectData, projectController.createProject);
-router.get('/', projectController.getAllProjects);
+router.get('/', projectController.getPaginatedProjects);
 router.get('/:id', projectController.getProject);
 
 module.exports = router;

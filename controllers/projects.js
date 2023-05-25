@@ -20,12 +20,14 @@ module.exports = {
     }
   },
 
-  async getAllProjects(req, res, next) {
+  async getPaginatedProjects(req, res, next) {
     try {
-      const projects = await projectService.getAllProjects();
+      const { skip, limit } = req.query;
+      const projects = await projectService.getPaginatedProjects(skip, limit);
       res.status(200).json(projects);
     } catch (error) {
       next(error);
     }
-  },
+  },  
+
 };

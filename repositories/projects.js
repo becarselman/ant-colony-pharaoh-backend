@@ -10,13 +10,14 @@ async function getProjectById(projectId) {
   return project;
 }
 
-async function getAllProjects() {
-  const projects = await Project.find();
+async function getPaginatedProjects(skip, limit) {
+  const projects = await Project.find().skip(parseInt(skip)).limit(parseInt(limit));
   return projects;
 }
+
 
 module.exports = {
   createProject,
   getProjectById,
-  getAllProjects,
+  getPaginatedProjects,
 };
