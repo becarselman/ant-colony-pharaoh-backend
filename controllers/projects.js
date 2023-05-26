@@ -24,12 +24,14 @@ module.exports = {
     try {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || 10;
-      const result = await projectService.getPaginatedProjects(page, limit);
+      const searchQuery = req.query.search || null;
+      const projectStatus = req.query.projectStatus || null;
+
+      const result = await projectService.getPaginatedProjects(page, limit, searchQuery, projectStatus);
       const { projects, count } = result;
       res.status(200).json({ projects, count });
     } catch (error) {
       next(error);
     }
   },
-
 };

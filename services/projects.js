@@ -15,12 +15,9 @@ module.exports = {
     return project;
   },
 
-  async getPaginatedProjects(page, limit) {
-    const projects = await projectRepository.getPaginatedProjects(page, limit);
-    const count = await projectRepository.getProjectsCount();
+  async getPaginatedProjects(page, limit, searchQuery, projectStatus) {
+    const projects = await projectRepository.getPaginatedProjects(page, limit, searchQuery, projectStatus);
+    const count = await projectRepository.getProjectsCount(searchQuery, projectStatus);
     return { projects, count };
   },
-  
-  
-
 };
