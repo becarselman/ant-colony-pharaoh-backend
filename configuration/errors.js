@@ -26,7 +26,9 @@ module.exports = {
     INVALID_PROJECT_ID: "Invalid project id",
     DATA_NOT_FOUND: "Data not found",
     PAGE_NUMBER_LESS_THAN_1: "Page number must be greater than 0",
-    PAGE_SIZE_LESS_THAN_0: "Page size must be positive"
+    PAGE_SIZE_LESS_THAN_0: "Page size must be greater than 0",
+    PAGE_SIZE_NOT_PROVIDED: "Page size not provided"
+
     
 
 

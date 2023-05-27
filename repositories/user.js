@@ -10,7 +10,7 @@ async function createUser(userData) {
 
 async function getAllUsers(page, pageSize) {
   return await User
-      .find({})
+      .find()
       .skip((page - 1) * pageSize)
       .limit(pageSize)
       .exec()

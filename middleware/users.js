@@ -14,11 +14,12 @@ const validatePageAndPageSize = async function (req, res, next) {
     }
 
     if (!req.query.size) {
-        req.query.size = 0
+        return res.status(422).json({
+            error: errors.PAGE_SIZE_NOT_PROVIDED
+        })
     }
 
-    //if page size is zero, mongoose will get entire collection
-    if (req.query.size < 0) {
+    if (req.query.size < 1) {
         return res.status(400).json({
             error: errors.PAGE_SIZE_LESS_THAN_0
         })
