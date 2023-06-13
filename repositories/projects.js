@@ -10,7 +10,55 @@ async function getProjectById(projectId) {
   return project;
 }
 
+async function getPaginatedProjects(page, limit, searchQuery, projectStatus) {
+  const offset = (page - 1) * limit;
+  let query = {};
+
+  if (searchQuery) {
+    query = buildSearchQuery(searchQuery);
+  }
+
+  if (projectStatus) {
+    query.projectStatus = projectStatus;
+  }
+
+  const projects = await Project.find(query)
+    .skip(offset)
+    .limit(limit);
+
+  return projects;
+}
+
+async function getProjectsCount(searchQuery, projectStatus) {
+  let query = {};
+
+  if (searchQuery) {
+    query = buildSearchQuery(searchQuery);
+  }
+
+  if (projectStatus) {
+    query.projectStatus = projectStatus;
+  }
+
+  const count = await Project.countDocuments(query);
+  return count;
+}
+
+function buildSearchQuery(searchQuery) {
+  const query = {};
+
+  for (const key in searchQuery) {
+    if (searchQuery.hasOwnProperty(key)) {
+      query[key] = { $regex: searchQuery[key], $options: 'i' };
+    }
+  }
+
+  return query;
+}
+
 module.exports = {
   createProject,
   getProjectById,
+  getPaginatedProjects,
+  getProjectsCount,
 };

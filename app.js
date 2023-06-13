@@ -6,8 +6,9 @@ const bodyParser = require('body-parser')
 const sendMailRouter = require('./routes/sendemail')
 const registerRoutes = require("./routes/register")
 const projectRoutes = require('./routes/projects')
+const forgotPasswordRoute = require('./routes/forgotPassword')
+const resetPasswordRoute = require('./routes/resetPassword.js')
 const usersRoutes = require('./routes/users')
-
 
 const app = express()
 const port = env.PORT
@@ -27,6 +28,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use('/sendmail', sendMailRouter)
+app.use('/forgot-password', forgotPasswordRoute), 
+app.use('/reset-password', resetPasswordRoute)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
