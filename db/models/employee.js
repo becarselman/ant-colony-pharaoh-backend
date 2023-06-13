@@ -11,7 +11,7 @@ const employeeSchema = new mongoose.Schema({
   },
   profileImage: {
     type: String,
-    required: false, // Postavljamo required na false
+    required: false, 
   },
   department: {
     type: String,

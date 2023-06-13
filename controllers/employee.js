@@ -22,15 +22,6 @@ exports.getEmployeeById = async (req, res) => {
   }
 };
 
-exports.getAllEmployee = async (req, res) => {
-  try {
-    const employee = await employeeService.getAllEmployee();
-    res.json(employee);
-  } catch (error) {
-    res.status(500).json({ error: errors.FAILED_TO_GET_EMPLOYEES });
-  }
-};
-
 exports.updateEmployee = async (req, res) => {
   try {
     const employee = await employeeService.updateEmployee(req.params.id, req.body);
@@ -52,5 +43,19 @@ exports.deleteEmployee = async (req, res) => {
     res.sendStatus(204);
   } catch (error) {
     res.status(500).json({ error: errors.FAILED_TO_DELETE_EMPLOYEE });
+  }
+};
+
+exports.getPaginatedEmployees = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const searchQuery = req.query.search || null;
+
+    const result = await employeeService.getPaginatedEmployees(page, limit, searchQuery);
+    const { employees, count } = result;
+    res.status(200).json({ employees, count });
+  } catch (error) {
+    res.status(500).json({ error: errors.FAILED_TO_GET_EMPLOYEES });
   }
 };
