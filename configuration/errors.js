@@ -27,9 +27,12 @@ module.exports = {
     DATA_NOT_FOUND: "Data not found",
     PAGE_NUMBER_LESS_THAN_1: "Page number must be greater than 0",
     PAGE_SIZE_LESS_THAN_0: "Page size must be greater than 0",
-    PAGE_SIZE_NOT_PROVIDED: "Page size not provided"
-
-    
-
-
-}
+    PAGE_SIZE_NOT_PROVIDED: "Page size not provided",
+    FAILED_TO_CREATE_EMPLOYEE: "Failed to create employee",
+    EMPLOYEE_NOT_FOUND: "Employee not found",
+    FAILED_TO_GET_EMPLOYEE: "Failed to get employee",
+    FAILED_TO_GET_EMPLOYEES: "Failed to get employees",
+    FAILED_TO_UPDATE_EMPLOYEE: "Failed to update employee",
+    FAILED_TO_DELETE_EMPLOYEE: "Failed to delete employee"
+  };
+  

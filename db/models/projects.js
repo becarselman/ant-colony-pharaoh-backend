@@ -15,7 +15,7 @@ const projectSchema = new mongoose.Schema({
     to: { type: Date, required: true }
   },
   developers: [{
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    employee: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true },
     fullTime: { type: Boolean, required: true }
   }],
   projectType: { type: String, enum: ['fixed', 'on going'], required: true },
@@ -24,8 +24,7 @@ const projectSchema = new mongoose.Schema({
   actualEndDate: { type: Date, default: null }, 
   salesChannel: { type: String },
   isFinished: { type: Boolean, default: false },
-  projectStatus: {	type: String, enum: Object.values(ProjectStatus),	default: ProjectStatus.Active,
-	},
+  projectStatus: { type: String, enum: Object.values(ProjectStatus), default: ProjectStatus.Active }
 });
 
 module.exports = mongoose.model('Project', projectSchema);

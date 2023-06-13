@@ -10,7 +10,7 @@ const projectDataSchema = joi.object({
     developers: joi.array()
         .items(
             joi.object({
-                user: joi.string().required(),
+                employee: joi.string().required(),
                 fullTime: joi.boolean().required(),
             })
         )

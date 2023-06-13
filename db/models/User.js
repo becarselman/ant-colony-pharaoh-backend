@@ -19,20 +19,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    department: {
-        type: String,
-        required: true,
-        uppercase: true,
-        enum: Object.values(constants.departments)
-    },
-    salary: {
-        type: Number,
-        required: true
-    },
-    stack: {
-        type: [String],
-        required: true
-    },
     password: {
         type: String,
         required: true
