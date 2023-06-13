@@ -10,5 +10,13 @@ module.exports = {
     userRoles: {
         USER: "USER",
         ADMIN: "ADMIN"
+    },
+    departments: {
+        DEV: "DEV",
+        QA: "QA",
+        DEVOPS: "DEVOPS",
+        HR: "HR",
+        PM: "PM",
+        DESIGN: "DESIGN"
     }
 }

@@ -5,11 +5,21 @@ const bcrypt = require("bcrypt")
 const users = [
     {
         "email": "pharaohadmin1@gmail.com",
+        "name": "Pharaoh1",
+        "surname": "Pharaoh1",
+        "department": "HR",
+        "salary": 12345,
+        "stack": ["BambooHR"],
         "password": bcrypt.hashSync("PharaohPassword1", 10),
         "role": "ADMIN"
     },
     {
         "email": "pharaohadmin2@gmail.com",
+        "name": "Pharaoh2",
+        "surname": "Pharaoh2",
+        "department": "DEV",
+        "salary": 54321,
+        "stack": ["Node", "React", "Express", ],
         "password": bcrypt.hashSync("PharaohPassword2", 10),
         "role": "ADMIN"
     }

@@ -5,22 +5,41 @@ async function getUserByEmail(email) {
 }
 
 async function createUser(userData) {
-  const { email, password, role } = { ...userData }
+  return await User.create(userData)
+}
 
-  return await User.create({email: email, password: password, role: role})
+async function getAllUsers(page, pageSize) {
+  return await User
+      .find()
+      .skip((page - 1) * pageSize)
+      .limit(pageSize)
+      .exec()
 }
 
 async function getUserById(userId) {
-  return User.findById(userId);
+  return await User.findById(userId).exec()
 }
 
 async function updateUserPassword(userId, hashedPassword) {
   return User.findByIdAndUpdate(userId, { password: hashedPassword });
 }
 
+async function updateUserById(userId, newData) {
+  return User.findByIdAndUpdate(userId, newData, {
+    runValidators: true
+  })
+}
+
+async function deleteUserById(userId) {
+  return await User.findByIdAndDelete(userId).exec()
+}
+
 module.exports = {
   getUserByEmail,
   createUser,
+  getAllUsers,
   getUserById,
-  updateUserPassword
+  updateUserPassword,
+  updateUserById,
+  deleteUserById
 };
