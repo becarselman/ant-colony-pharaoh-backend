@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const sendMailRouter = require('./routes/sendemail')
 const registerRoutes = require("./routes/register")
 const projectRoutes = require('./routes/projects')
+const usersRoutes = require('./routes/users')
 
 
 const app = express()
@@ -20,6 +21,7 @@ app.use(cors({
 app.use("/login", loginRoutes)
 app.use("/register", registerRoutes)
 app.use('/projects', projectRoutes);
+app.use('/users', usersRoutes)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -31,5 +33,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, async () => {
-  console.log(`Express application is running on ${env.BASE_URL}${port}`);
+  console.log(`Express application is running on ${port}`);
 })

@@ -1,6 +1,7 @@
 const mongoose = require("../connection")
 const validator = require("validator")
 const errors = require("../../configuration/errors")
+const constants = require("../../utils/constants")
 const bcrypt = require("bcrypt")
 
 const UserSchema = new mongoose.Schema({
@@ -10,6 +11,28 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         validate: [validator.isEmail, errors.EMAIL_INVALID_FORMAT]
     },
+    name: {
+        type: String,
+        required: true
+    },
+    surname: {
+        type: String,
+        required: true
+    },
+    department: {
+        type: String,
+        required: true,
+        uppercase: true,
+        enum: Object.values(constants.departments)
+    },
+    salary: {
+        type: Number,
+        required: true
+    },
+    stack: {
+        type: [String],
+        required: true
+    },
     password: {
         type: String,
         required: true
@@ -18,6 +41,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         uppercase: true,
+        enum: Object.values(constants.userRoles)
     }
 });
 
