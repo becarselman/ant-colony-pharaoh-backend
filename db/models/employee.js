@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { departments, techStacks } = require('../../utils/enums');
 
 const employeeSchema = new mongoose.Schema({
   firstName: {
@@ -15,7 +16,7 @@ const employeeSchema = new mongoose.Schema({
   },
   department: {
     type: String,
-    enum: ['Management', 'Administration', 'Design', 'Development'],
+    enum: [departments.MANAGEMENT, departments.ADMINISTRATION, departments.DESIGN, departments.DEVELOPMENT],
     required: true,
   },
   monthlySalary: {
@@ -24,7 +25,7 @@ const employeeSchema = new mongoose.Schema({
   },
   techStack: {
     type: String,
-    enum: ['Full Stack', 'Front End', 'Back End', 'N/A'],
+    enum: [techStacks.FULL_STACK, techStacks.FRONT_END, techStacks.BACK_END, techStacks.NA],
     required: true,
   },
 });
