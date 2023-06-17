@@ -1,50 +1,53 @@
-const Employee = require('../db/models/employee');
-const errors = require('../configuration/errors');
+const employeeRepository = require('../repositories/employee');
 
-module.exports = {
+class EmployeeService {
   async createEmployee(employeeData) {
-    return await Employee.create(employeeData);
-  },
+    try {
+      return await employeeRepository.createEmployee(employeeData);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async getEmployeeById(employeeId) {
-    const employee = await Employee.findById(employeeId);
-    if (!employee) {
-      throw new Error(errors.EMPLOYEE_NOT_FOUND);
+    try {
+      return await employeeRepository.getEmployeeById(employeeId);
+    } catch (error) {
+      throw error;
     }
-    return employee;
-  },
-
-  async updateEmployee(employeeId, employeeData) {
-    return await Employee.findByIdAndUpdate(employeeId, employeeData, { new: true });
-  },
-
-  async deleteEmployee(employeeId) {
-    return await Employee.findByIdAndDelete(employeeId);
-  },
+  }
 
   async getAllEmployees() {
-    return await Employee.find();
-  },
+    try {
+      return await employeeRepository.getAllEmployees();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateEmployee(employeeId, employeeData) {
+    try {
+      return await employeeRepository.updateEmployee(employeeId, employeeData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteEmployee(employeeId) {
+    try {
+      return await employeeRepository.deleteEmployee(employeeId);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async getPaginatedEmployees(page, limit, searchQuery) {
-    const skip = (page - 1) * limit;
-    const searchRegex = new RegExp(searchQuery, 'i');
-
-    const employeesQuery = Employee.find({
-      $or: [
-        { firstName: { $regex: searchRegex } },
-        { lastName: { $regex: searchRegex } },
-      ],
-    });
-
-    const employees = await employeesQuery.skip(skip).limit(limit).exec();
-    const count = await Employee.countDocuments({
-      $or: [
-        { firstName: { $regex: searchRegex } },
-        { lastName: { $regex: searchRegex } },
-      ],
-    });
-
-    return { employees, count };
+    try {
+      return await employeeRepository.getPaginatedEmployees(page, limit, searchQuery);
+    } catch (error) {
+      throw error;
+    }
   }
-};
+}
+
+module.exports = new EmployeeService();
