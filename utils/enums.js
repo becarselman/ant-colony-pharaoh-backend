@@ -11,5 +11,11 @@ module.exports = {
       BACK_END: 'Back End',
       NA: 'N/A',
     },
+    projectStatus: {
+      ACTIVE: 'Active',
+      INACTIVE: 'Inactive',
+      ONHOLD: 'On-hold',
+      COMPLETED: 'Completed'
+    },
   };
   
