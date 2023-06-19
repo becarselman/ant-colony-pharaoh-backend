@@ -1,63 +1,77 @@
 const Employee = require('../db/models/employee');
 
-class EmployeeRepository {
-  async createEmployee(employeeData) {
-    try {
-      const employee = new Employee(employeeData);
-      return await employee.save();
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getEmployeeById(employeeId) {
-    try {
-      return await Employee.findById(employeeId);
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getAllEmployees() {
-    try {
-      return await Employee.find();
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async updateEmployee(employeeId, employeeData) {
-    try {
-      return await Employee.findByIdAndUpdate(employeeId, employeeData, { new: true });
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async deleteEmployee(employeeId) {
-    try {
-      return await Employee.findByIdAndDelete(employeeId);
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getPaginatedEmployees(page, limit, searchQuery) {
-    try {
-      const query = searchQuery ? { $text: { $search: searchQuery } } : {};
-      const options = {
-        page: page,
-        limit: limit,
-      };
-      const employees = await Employee.paginate(query, options);
-      return {
-        employees: employees.docs,
-        count: employees.totalDocs,
-      };
-    } catch (error) {
-      throw error;
-    }
+async function createEmployee(employeeData) {
+  try {
+    const employee = await Employee.create(employeeData);
+    return employee;
+  } catch (error) {
+    throw error;
   }
 }
 
-module.exports = new EmployeeRepository();
+async function getEmployeeById(employeeId) {
+  try {
+    return await Employee.findById(employeeId);
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllEmployees() {
+  try {
+    return await Employee.find();
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateEmployee(employeeId, employeeData) {
+  try {
+    const updatedEmployee = await Employee.findByIdAndUpdate(employeeId, employeeData, { new: true });
+    return updatedEmployee;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteEmployee(employeeId) {
+  try {
+    const deletedEmployee = await Employee.findByIdAndDelete(employeeId);
+    return deletedEmployee;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getPaginatedEmployees(page, limit, searchQuery) {
+  try {
+    const query = searchQuery
+      ? {
+          $or: [
+            { firstName: { $regex: searchQuery, $options: "i" } }, 
+            { lastName: { $regex: searchQuery, $options: "i" } }, 
+          ],
+        }
+      : {};
+    const skip = (page - 1) * limit;
+    const employees = await Employee.find(query)
+      .skip(skip)
+      .limit(limit);
+    const count = await Employee.countDocuments(query);
+    return {
+      employees,
+      count,
+    };
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  createEmployee,
+  getEmployeeById,
+  getAllEmployees,
+  updateEmployee,
+  deleteEmployee,
+  getPaginatedEmployees,
+};

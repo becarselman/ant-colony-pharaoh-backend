@@ -1,34 +1,33 @@
 const employeeService = require('../services/employee');
-const errors = require('../configuration/errors');
+const errors = require("../configuration/errors");
 
 exports.createEmployee = async (req, res) => {
   try {
     const employee = await employeeService.createEmployee(req.body);
-    res.status(201).json(employee);
+    return res.status(201).json(employee);
   } catch (error) {
-    res.status(500).json({ error: errors.FAILED_TO_CREATE_EMPLOYEE });
+    return res.status(500).json({ error: errors.FAILED_TO_CREATE_EMPLOYEE });
   }
 };
 
 exports.getEmployeeById = async (req, res) => {
   try {
     const employee = await employeeService.getEmployeeById(req.params.id);
-    res.json(employee);
-  } catch (error) {
-    if (error.message === errors.EMPLOYEE_NOT_FOUND) {
-      res.status(404).json({ error: errors.EMPLOYEE_NOT_FOUND });
-    } else {
-      res.status(500).json({ error: errors.FAILED_TO_GET_EMPLOYEE });
+    if (!employee) {
+      return res.status(404).json({ error: errors.EMPLOYEE_NOT_FOUND });
     }
+    return res.json(employee);
+  } catch (error) {
+    return res.status(500).json({ error: errors.FAILED_TO_GET_EMPLOYEE });
   }
 };
 
 exports.getAllEmployees = async (req, res) => {
   try {
     const employees = await employeeService.getAllEmployees();
-    res.json(employees);
+    return res.status(200).json(employees);
   } catch (error) {
-    res.status(500).json({ error: errors.FAILED_TO_GET_EMPLOYEE });
+    return res.status(500).json({ error: errors.FAILED_TO_GET_EMPLOYEES });
   }
 };
 
@@ -38,21 +37,18 @@ exports.updateEmployee = async (req, res) => {
     if (!employee) {
       return res.status(404).json({ error: errors.EMPLOYEE_NOT_FOUND });
     }
-    res.json(employee);
+    return res.json(employee);
   } catch (error) {
-    res.status(500).json({ error: errors.FAILED_TO_UPDATE_EMPLOYEE });
+    return res.status(500).json({ error: errors.FAILED_TO_UPDATE_EMPLOYEE });
   }
 };
 
 exports.deleteEmployee = async (req, res) => {
   try {
-    const employee = await employeeService.deleteEmployee(req.params.id);
-    if (!employee) {
-      return res.status(404).json({ error: errors.EMPLOYEE_NOT_FOUND });
-    }
-    res.sendStatus(204);
+    await employeeService.deleteEmployee(req.params.id);
+    return res.status(200).json({ message: 'Employee deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: errors.FAILED_TO_DELETE_EMPLOYEE });
+    return res.status(500).json({ error: errors.FAILED_TO_DELETE_EMPLOYEE });
   }
 };
 
@@ -64,8 +60,8 @@ exports.getPaginatedEmployees = async (req, res) => {
 
     const result = await employeeService.getPaginatedEmployees(page, limit, searchQuery);
     const { employees, count } = result;
-    res.status(200).json({ employees, count });
+    return res.status(200).json({ employees, count });
   } catch (error) {
-    res.status(500).json({ error: errors.FAILED_TO_GET_EMPLOYEES });
+    return res.status(500).json({ error: errors.FAILED_TO_GET_EMPLOYEES });
   }
 };

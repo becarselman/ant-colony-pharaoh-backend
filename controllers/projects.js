@@ -1,25 +1,9 @@
 const projectService = require("../services/projects");
-const employeeService = require("../services/employee");
 
 module.exports = {
   async createProject(req, res, next) {
     try {
-      const { developers, ...projectData } = req.body;
-      const projectDevelopers = [];
-
-      for (const developer of developers) {
-        const employee = await employeeService.getEmployeeById(developer.employee);
-        if (!employee) {
-          return res.status(400).json({ error: 'Employee not found.' });
-        }
-        projectDevelopers.push({
-          employee: employee._id, 
-          fullTime: developer.fullTime
-        });
-      }
-
-      projectData.developers = projectDevelopers;
-      const project = await projectService.createProject(projectData);
+      const project = await projectService.createProject(req.body);
       res.status(201).json(project);
     } catch (error) {
       next(error);
