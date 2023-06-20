@@ -13,9 +13,6 @@ exports.createEmployee = async (req, res) => {
 exports.getEmployeeById = async (req, res) => {
   try {
     const employee = await employeeService.getEmployeeById(req.params.id);
-    if (!employee) {
-      return res.status(404).json({ error: errors.EMPLOYEE_NOT_FOUND });
-    }
     return res.json(employee);
   } catch (error) {
     return res.status(500).json({ error: errors.FAILED_TO_GET_EMPLOYEE });
@@ -34,9 +31,6 @@ exports.getAllEmployees = async (req, res) => {
 exports.updateEmployee = async (req, res) => {
   try {
     const employee = await employeeService.updateEmployee(req.params.id, req.body);
-    if (!employee) {
-      return res.status(404).json({ error: errors.EMPLOYEE_NOT_FOUND });
-    }
     return res.json(employee);
   } catch (error) {
     return res.status(500).json({ error: errors.FAILED_TO_UPDATE_EMPLOYEE });
