@@ -24,20 +24,11 @@ module.exports = {
 
   async getAllEmployees() {
     try {
-      const employees = await employeeRepository.getAllEmployees();
-      const simplifiedEmployees = employees.map((employee) => {
-        return {
-          id: employee.id,
-          firstName: employee.firstName,
-          lastName: employee.lastName,
-        };
-      });
-      return simplifiedEmployees;
+      return await employeeRepository.getAllEmployees();
     } catch (error) {
       throw new Error(errors.FAILED_TO_GET_EMPLOYEES);
     }
   },
-  
 
   async updateEmployee(employeeId, employeeData) {
     try {

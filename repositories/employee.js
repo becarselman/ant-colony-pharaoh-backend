@@ -19,7 +19,7 @@ async function getEmployeeById(employeeId) {
 
 async function getAllEmployees() {
   try {
-    return await Employee.find();
+    return await Employee.find({}, 'id firstName lastName');
   } catch (error) {
     throw error;
   }
