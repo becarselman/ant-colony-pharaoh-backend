@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
+const { projectStatus } = require('../../utils/enums');
 
-const ProjectStatus = {
-  Active: 'Active',
-  Inactive: 'Inactive',
-  OnHold: 'On-hold',
-  Completed: 'Completed'
-};
 
 const projectSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -15,17 +10,18 @@ const projectSchema = new mongoose.Schema({
     to: { type: Date, required: true }
   },
   developers: [{
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    employee: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true },
     fullTime: { type: Boolean, required: true }
   }],
-  projectType: { type: String, enum: ['fixed', 'on going'], required: true },
+  projectType: { type: String, enum: ['fixed', 'on going'] },
   hourlyRate: { type: Number, required: true },
   projectValue: { type: Number, required: true },
   actualEndDate: { type: Date, default: null }, 
   salesChannel: { type: String },
   isFinished: { type: Boolean, default: false },
-  projectStatus: {	type: String, enum: Object.values(ProjectStatus),	default: ProjectStatus.Active,
-	},
+  projectStatus: { type: String, 
+  enum: [projectStatus.ACTIVE, projectStatus.INACTIVE, projectStatus.ONHOLD, projectStatus.COMPLETED],
+  default: projectStatus.Active }
 });
 
 module.exports = mongoose.model('Project', projectSchema);

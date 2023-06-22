@@ -22,30 +22,6 @@ const registerDataSchema = joi.object({
             "string.empty": errors.SURNAME_NOT_PROVIDED,
             "any.required": errors.SURNAME_NOT_PROVIDED
         }),
-    department: validationRules.department
-        .required()
-        .messages({
-            "string.empty": errors.DEPARTMENT_NOT_PROVIDED,
-            "any.required": errors.DEPARTMENT_NOT_PROVIDED,
-            "department.notFound":  errors.DEPARTMENT_NOT_FOUND
-        }),
-    salary: validationRules.salary
-        .required()
-        .greater(0)
-        .messages({
-            "number.empty": errors.SALARY_NOT_PROVIDED,
-            "any.required": errors.SALARY_NOT_PROVIDED,
-            "number.base": errors.SALARY_NOT_NUMBER,
-            "number.greater": errors.SALARY_NOT_POSITIVE
-        }),
-    stack: validationRules.stack
-        .required()
-        .min(1)
-        .messages({
-            "any.required": errors.STACK_NOT_PROVIDED,
-            "any.empty": errors.STACK_NOT_PROVIDED,
-            "array.min": errors.STACK_NOT_PROVIDED
-        }),
     password: validationRules.password
         .required()
         .messages({
