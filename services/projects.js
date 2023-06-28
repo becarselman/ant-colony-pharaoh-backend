@@ -14,8 +14,8 @@ module.exports = {
       }
       projectDevelopers.push({
         employee: employee._id,
-        fullTime: developer.fullTime
-      });
+        employmentType: developer.employmentType
+            });
     }
 
     projectData.developers = projectDevelopers;
