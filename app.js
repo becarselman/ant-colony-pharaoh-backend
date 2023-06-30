@@ -38,7 +38,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Ruta za provjeru valjanosti tokena
 app.use(tokenRoutes);
 
 app.listen(port, async () => {

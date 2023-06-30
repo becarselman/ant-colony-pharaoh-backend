@@ -1,14 +1,16 @@
+const jwt = require('jsonwebtoken');
+
+const secretKey = process.env.JWT_SECRET;
+
 function validateToken(token) {
-    const validToken = 'valid_token';
-    const tokenExpired = false;
-  
-    if (token === validToken && !tokenExpired) {
-      return true;
-    } else {
-      return false;
-    }
+  try {
+    jwt.verify(token, secretKey);
+    return true;
+  } catch (error) {
+    return false;
   }
-  
-  module.exports = {
-    validateToken
-  };
+}
+
+module.exports = {
+  validateToken,
+};
