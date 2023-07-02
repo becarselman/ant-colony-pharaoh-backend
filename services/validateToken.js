@@ -1,11 +1,9 @@
-const jwt = require('jsonwebtoken');
-
-const secretKey = process.env.JWT_SECRET;
+const { verifyJwtToken } = require("../utils/helper");
+const env = require("../configuration/env");
 
 function validateToken(token) {
   try {
-    jwt.verify(token, secretKey);
-    return true;
+    return verifyJwtToken(token, env.JWT_SECRET);
   } catch (error) {
     return false;
   }
