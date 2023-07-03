@@ -1,14 +1,10 @@
 const tokenService = require('../services/validateToken');
 
-function validateToken(req, res) {
+async function validateToken(req, res) {
   const { token } = req.body;
-  const isValid = tokenService.validateToken(token);
+  const isValid = await tokenService.validateToken(token); 
 
-  if (isValid) {
-    res.status(200).json({ valid: true });
-  } else {
-    res.status(400).json({ valid: false });
-  }
+  res.status(isValid ? 200 : 400).json({ valid: isValid });
 }
 
 module.exports = {
