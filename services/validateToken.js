@@ -1,9 +1,10 @@
 const { verifyJwtToken } = require("../utils/helper");
 const env = require("../configuration/env");
 
-function validateToken(token) {
+async function validateToken(token) {
   try {
-    return verifyJwtToken(token, env.JWT_SECRET);
+    await verifyJwtToken(token, env.JWT_SECRET);
+    return true;
   } catch (error) {
     return false;
   }
