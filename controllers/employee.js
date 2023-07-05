@@ -53,6 +53,8 @@ exports.getPaginatedEmployees = async (req, res) => {
     const searchQuery = req.query.search || null;
 
     const result = await employeeService.getPaginatedEmployees(page, limit, searchQuery);
+
+    console.log(result)
     const { employees, count } = result;
     return res.status(200).json({ employees, count });
   } catch (error) {

@@ -44,6 +44,14 @@ async function getProjectsCount(searchQuery, projectStatus) {
   return count;
 }
 
+async function updateProject(projectId, projectData) {
+  return await Project.findByIdAndUpdate(projectId, projectData, { new: true }).exec()
+}
+
+async function deleteProject(projectId) {
+  return await Project.findByIdAndDelete(projectId).exec()
+}
+
 function buildSearchQuery(searchQuery) {
   const query = {};
 
@@ -61,4 +69,6 @@ module.exports = {
   getProjectById,
   getPaginatedProjects,
   getProjectsCount,
+  updateProject,
+  deleteProject
 };
