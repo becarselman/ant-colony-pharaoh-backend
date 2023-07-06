@@ -36,4 +36,16 @@ module.exports = {
     const count = await projectRepository.getProjectsCount(searchQuery, projectStatus);
     return { projects, count };
   },
+
+  async deleteProject(projectId) {
+    try {
+      const deletedProject = await projectRepository.deleteProjectById(projectId);
+      if (!deletedProject) {
+        throw new Error(errors.DATA_NOT_FOUND);
+      }
+      return deletedProject;
+    } catch (error) {
+      throw new Error(errors.FAILED_TO_DELETE_PROJECT);
+    }
+  }
 };

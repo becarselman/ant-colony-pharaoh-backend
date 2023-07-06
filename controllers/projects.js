@@ -1,4 +1,5 @@
 const projectService = require("../services/projects");
+const errors = require("../configuration/errors");
 
 module.exports = {
   async createProject(req, res, next) {
@@ -32,6 +33,16 @@ module.exports = {
       res.status(200).json({ projects, count });
     } catch (error) {
       next(error);
+    }
+  },
+
+  async deleteProject(req, res) {
+    try {
+      const { id } = req.params;
+      await projectService.deleteProject(id);
+      res.status(200).json({ message: 'Project deleted successfully' });
+    } catch (error) {
+      return res.status(500).json({error: errors.FAILED_TO_DELETE_PROJECT});
     }
   },
 };

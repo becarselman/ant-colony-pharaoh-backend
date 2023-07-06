@@ -44,6 +44,15 @@ async function getProjectsCount(searchQuery, projectStatus) {
   return count;
 }
 
+async function deleteProjectById(projectId) {
+  try {
+    const deletedProject = await Project.findByIdAndDelete(projectId);
+    return deletedProject;
+  } catch (error) {
+    throw error;
+  }
+}
+
 function buildSearchQuery(searchQuery) {
   const query = {};
 
@@ -56,9 +65,12 @@ function buildSearchQuery(searchQuery) {
   return query;
 }
 
+
+
 module.exports = {
   createProject,
   getProjectById,
   getPaginatedProjects,
   getProjectsCount,
+  deleteProjectById,
 };
