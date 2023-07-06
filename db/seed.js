@@ -4,25 +4,26 @@ const bcrypt = require("bcrypt")
 
 const users = [
     {
-        "email": "pharaohadmin1@gmail.com",
-        "name": "Pharaoh1",
-        "surname": "Pharaoh1",
-        "department": "HR",
-        "salary": 12345,
-        "stack": ["BambooHR"],
-        "password": bcrypt.hashSync("PharaohPassword1", 10),
+        "email": "mkasapovic@gmail.com",
+        "name": "Meliha",
+        "surname": "Kasapovic",
+        "password": bcrypt.hashSync("MKasapovic1", 10),
+        "role": "ADMIN"
+    },
+	{
+        "email": "tvelic@gmail.com",
+        "name": "Tarik",
+        "surname": "Velic",
+        "password": bcrypt.hashSync("TVelic1", 10),
         "role": "ADMIN"
     },
     {
-        "email": "pharaohadmin2@gmail.com",
-        "name": "Pharaoh2",
-        "surname": "Pharaoh2",
-        "department": "DEV",
-        "salary": 54321,
-        "stack": ["Node", "React", "Express", ],
-        "password": bcrypt.hashSync("PharaohPassword2", 10),
+        "email": "evlahovljak@gmail.com",
+        "name": "Elvir",
+        "surname": "Vlahovljak",
+        "password": bcrypt.hashSync("EVlahovljak1", 10),
         "role": "ADMIN"
-    }
+    },
 ]
 
 async function seed() {
@@ -32,8 +33,9 @@ async function seed() {
     const numOfDefaultUsersInDB = await User.count({
         email: {
             $in: [
-                "pharaohadmin1@gmail.com",
-                "pharaohadmin2@gmail.com"
+                "mkasapovic@gmail.com",
+                "tvelic@gmail.com",
+				"evlahovljak@gmail.com"
             ]
         }
     })
