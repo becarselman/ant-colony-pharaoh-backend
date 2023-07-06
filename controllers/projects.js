@@ -34,4 +34,24 @@ module.exports = {
       next(error);
     }
   },
+
+  async updateProject(req, res, next) {
+    try {
+      const project = await projectService.updateProject(req.params.id, req.body)
+      return res.status(200).json(project)
+    }
+    catch (error) {
+      next(error)
+    }
+  },
+
+  async deleteProject(req, res, next) {
+    try {
+      await projectService.deleteProject(req.params.id)
+      return res.status(200).json({ message: "Project deleted successfully" })
+    }
+    catch (error) {
+      next(error)
+    }
+  }
 };

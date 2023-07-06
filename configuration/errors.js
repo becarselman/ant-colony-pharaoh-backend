@@ -35,6 +35,8 @@ module.exports = {
     FAILED_TO_UPDATE_EMPLOYEE: "Failed to update employee",
     FAILED_TO_DELETE_EMPLOYEE: "Failed to delete employee",
     FAILED_TO_GET_EMPLOYEES: "Failed to get employees",
+    FAILED_TO_UPDATE_PROJECT: "Failed to update project",
+    FAILED_TO_DELETE_PROJECT: "Failed to delete project"
 
   };
   
