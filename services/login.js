@@ -21,7 +21,9 @@ async function loginUser(loginData) {
 
     return {
         userId: user._id,
-        token
+        token,
+        name: user.name,
+        surname: user.surname
     }
 }
 
