@@ -23,7 +23,7 @@ async function getPaginatedProjects(page, limit, searchQuery, projectStatus) {
   }
 
   const projects = await Project.find(query)
-    .populate('developers.employee') // Populate the 'developers.employee' field with the referenced 'Employee' documents
+    .populate('developers.employee') 
     .skip(offset)
     .limit(limit);
 
