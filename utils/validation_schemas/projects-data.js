@@ -12,7 +12,7 @@ const projectDataSchema = joi.object({
       .items(
         joi.object({
           employee: joi.string(),
-          employmentType: joi.string().valid('full-time', 'part-time').required(),
+          fullTime: joi.boolean(),
         })
       )
       .min(1),
