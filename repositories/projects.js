@@ -24,7 +24,6 @@ async function getPaginatedProjects(page, limit, searchQuery, projectStatus) {
 
   const projects = await Project.find(query)
     .populate('developers.employee') 
-    .populate('developers.employee') 
     .skip(offset)
     .limit(limit);
 
