@@ -6,6 +6,11 @@ async function createProject(projectData) {
 }
 
 async function getProjectById(projectId) {
+  if (projectId === "all") {
+    const projects = await Project.find();
+    return projects;
+  }
+
   const project = await Project.findById(projectId);
   return project;
 }
