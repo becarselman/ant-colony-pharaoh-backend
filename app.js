@@ -9,7 +9,8 @@ const projectRoutes = require('./routes/projects');
 const forgotPasswordRoute = require('./routes/forgotPassword');
 const resetPasswordRoute = require('./routes/resetPassword.js');
 const usersRoutes = require('./routes/users');
-const employeeRoutes = require('./routes/employee'); 
+const employeeRoutes = require('./routes/employee');
+const tokenRoutes = require('./routes/validateToken');
 
 const app = express();
 const port = env.PORT;
@@ -36,6 +37,8 @@ app.use('/reset-password', resetPasswordRoute);
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+
+app.use(tokenRoutes);
 
 app.listen(port, async () => {
   console.log(`Express application is running on ${port}`);
